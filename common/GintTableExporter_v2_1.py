@@ -20,6 +20,7 @@ def main():
             window.title("gINT table exporter")
             window.resizable(False,False)
             window.wm_iconbitmap(bitmap='common/gint.ico', default='common/gint.ico')
+            window.geometry("125+125")
 
             self.file_location: str 
             self.gintpath: str
