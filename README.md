@@ -1,4 +1,4 @@
-# GintTableExporter
+# GintTableExporter <img src="common/ginttableexporter_2.png" data-canonical-src="common/ginttableexporter_2.png" width="40"/>
 GUI to extract tables from gINT (a geotechnical Access database) to excel files.
 <br>
 
@@ -44,7 +44,7 @@ GUI to extract tables from gINT (a geotechnical Access database) to excel files.
 
 <br>
 
-<img src="common/ginttableexporter_2.png" data-canonical-src="common/ginttableexporter_2.png" width="200"/>
+<img src="common/ginttableexporter_2.png" data-canonical-src="common/ginttableexporter_2.png" width="150"/>
 
 <br>
 
