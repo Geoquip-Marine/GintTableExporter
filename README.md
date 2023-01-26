@@ -20,7 +20,7 @@ GUI to extract tables from gINT (a geotechnical database, ) to excel files.
 
 <br>
 
-<img src="common/ginttableexporter.png" data-canonical-src="common/ginttableexporter.png"/>
+<img src="common/images/ginttableexporter.png" data-canonical-src="common/images/ginttableexporter.png"/>
 <br>
 
  - [Select a gINT project](#select-a-gint-project)
@@ -44,6 +44,6 @@ GUI to extract tables from gINT (a geotechnical database, ) to excel files.
 
 <br><br>
 
-<img src="common/ginttableexporter_2.png" data-canonical-src="common/ginttableexporter_2.png" width="150"/>
+<img src="common/images/ginttableexporter_2.png" data-canonical-src="common/images/ginttableexporter_2.png" width="150"/>
 
 ##### Anton [(lachesis17)](https://github.com/lachesis17) 🪐
