@@ -1,6 +1,6 @@
 # GintTableExporter <img src="common/ginttableexporter_2.png" data-canonical-src="common/ginttableexporter_2.png" width="40"/>
-GUI to extract tables from gINT (a geotechnical Access database) to excel files.
-<br>
+GUI to extract tables from gINT (a geotechnical database, ) to excel files.
+<br><br>
 
 #### How to extract tables from gINT:
      - Open a gINT project file
@@ -42,10 +42,8 @@ GUI to extract tables from gINT (a geotechnical Access database) to excel files.
   - Filter locations (PointID records) from the POINT table 
     - By default, all PointID records are exported, unless the user specifies individual locations
 
-<br>
+<br><br>
 
 <img src="common/ginttableexporter_2.png" data-canonical-src="common/ginttableexporter_2.png" width="150"/>
-
-<br>
 
 ##### Anton [(lachesis17)](https://github.com/lachesis17) 🪐
