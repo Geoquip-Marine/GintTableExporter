@@ -6,7 +6,7 @@ GUI to extract tables from gINT (a geotechnical Access database) to excel files.
      - Open a gINT project file
      
      - Selecting invidivdual locations:
-       - By default, all locations will be exported, even if none are selected (all PointID records in POINT table)
+       - By default, all PointID records from POINT table will be exported, even if none are selected
        - If individual locations are required:
          - First, select them from the bottom listbox (before selecting tables) 
          - Click 'Add selected Borehole(s) to range'
