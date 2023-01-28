@@ -121,16 +121,17 @@ def main():
 
             #establish connection to sql database (gint)
             try:
-                conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ='+self.file_location+';')
+                gint = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ='+self.file_location+';')
             except Exception as e:
                 print(f"Couldn't establish connection with gINT. Please ensure you have Access Driver 64-bit installed. {e}")
                 return
+            print(f"Loaded gINT.")
 
             self.enable_buttons()
 
             #load bottom listbox with borehole ids from the loaded gint
             bh_query = "SELECT PointID FROM POINT"
-            point_list = pd.read_sql(bh_query, conn)
+            point_list = pd.read_sql(bh_query, gint)
             point_id = point_list['PointID'].tolist()
             self.bh_list = point_id
             self.pointtable.delete(0, END)
@@ -139,7 +140,7 @@ def main():
                 self.pointtable.insert(END, point_id[x])
 
             #get all the tables from gint and put them into a list
-            cursor = conn.cursor()
+            cursor = gint.cursor()
             tableNames = [x[2] for x in cursor.tables() if x[3] == 'TABLE']
 
             INVALIDCHARS = '<>:"/\|?* �'
@@ -183,7 +184,7 @@ def main():
 
             #double check we can talk to gint before calling sql query
             try:
-                conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ='+self.file_location+';')
+                gint = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ='+self.file_location+';')
             except Exception as e:
                 print(f"Couldn't establish connection with gINT. Please ensure you have Access Driver 64-bit installed. {e}")
                 self.enable_buttons()
@@ -226,7 +227,7 @@ def main():
                 if sheetname == "STCN_DATA":  
                     print(sheetname + " extracting from gINT...")
                     query = f"SELECT * FROM {str(list_all_tables[df_iteration])} WHERE PointID IN ({str(bh_select)})"
-                    df_iteration = pd.read_sql(query, conn)
+                    df_iteration = pd.read_sql(query, gint)
                     df_iteration.sort_values("PointID")
                     df_iteration.drop(['GintRecID'], axis=1, inplace=True)
                     df_iteration.to_csv(f"{self.export_dir}{self.gint_name} - {sheetname}_{timestamp}.csv", index=False)
@@ -246,14 +247,14 @@ def main():
                     #sleep so it doesn't max out cpu load in single thread from all the sql queries
                     time.sleep(0.01)
                     query = f"SELECT * FROM {str(list_all_tables[df_iteration])} WHERE PointID IN ({str(bh_select)})"
-                    df_iteration = pd.read_sql(query, conn)
+                    df_iteration = pd.read_sql(query, gint)
                     #amke sure to sort the values from location name alphabetically, all other columns follow suit it seems
                     df_iteration.sort_values("PointID")
                 except:
                     #another query if the table doesn't have any pointid field (like 'dict' or 'project')
                     time.sleep(0.01)
                     query = (f"SELECT * FROM {list_all_tables[df_iteration]}")
-                    df_iteration = pd.read_sql(query, conn)
+                    df_iteration = pd.read_sql(query, gint)
 
                 #get rid of that pesky gintrecid, save the table selected as the dataframe dict's key and the sheetname for excel
                 df_iteration.drop(['GintRecID'], axis=1, inplace=True)    
