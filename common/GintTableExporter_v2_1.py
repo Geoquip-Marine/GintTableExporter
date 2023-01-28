@@ -276,8 +276,8 @@ def main():
             self.filename = (f"{self.gint_name} - {filename_tables}_{timestamp}")
 
             print(f"""------------------------------------------------------
-    Saving tables to excel file, this may take a while...
-    ------------------------------------------------------""")
+Saving tables to excel file, this may take a while...
+------------------------------------------------------""")
 
             #create the excel file with the first dataframe from dict, so pd.excelwriter can be called (can only be used on existing excel workbook to append more sheets)
             if not len(final_dataframes.keys()) < 1:
@@ -307,14 +307,14 @@ def main():
             
             if empty_dataframes != []:
                 print(f"""----------------------------------------------------
-    The following tables were empty, and were skipped...
-    ----------------------------------------------------
-    {empty_dataframes}""")
+The following tables were empty, and were skipped...
+----------------------------------------------------
+{empty_dataframes}""")
 
-            print(f"""---------------------
-    EXCEL EXPORT COMPLETE               
-    ---------------------
-    {self.export_dir}{self.filename}.xlsx""")
+                print(f"""---------------------
+EXCEL EXPORT COMPLETE               
+---------------------
+{self.export_dir}{self.filename}.xlsx""")
             
             self.enable_buttons()
 
