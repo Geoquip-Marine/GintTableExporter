@@ -312,7 +312,7 @@ The following tables were empty, and were skipped...
 ----------------------------------------------------
 {empty_dataframes}""")
 
-                print(f"""---------------------
+            print(f"""---------------------
 EXCEL EXPORT COMPLETE               
 ---------------------
 {self.export_dir}{self.filename}.xlsx""")
