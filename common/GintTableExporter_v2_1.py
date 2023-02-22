@@ -8,6 +8,7 @@ from tkinter import messagebox
 import warnings
 warnings.filterwarnings("ignore")
 import customtkinter as ct
+from customtkinter.windows.widgets.scaling import CTkScalingBaseClass
 import time
 import datetime
 
@@ -17,6 +18,11 @@ def main():
 
         def __init__(self):
             super(Application, self).__init__(window)
+
+            CTkScalingBaseClass.destroy(window)
+            CTkScalingBaseClass.destroy(self)
+            ct.deactivate_automatic_dpi_awareness()
+
             window.title("gINT table exporter")
             window.resizable(False,False)
             window.wm_iconbitmap(bitmap='common/assets/gint.ico', default='common/assets/gint.ico')
@@ -218,6 +224,7 @@ def main():
             num_tables = len(list_all_tables)
             df_dict = {}
 
+            stcn = False
             #looping over tables select to query data and save to a new sheet in the workbook
             for df_iteration in range(0, num_tables):
                 self.update_idletasks()
@@ -225,6 +232,7 @@ def main():
                 sheetname = list_all_tables[df_iteration]
                 #save stcn_data to a seperate csv to save time for large dataframe
                 if sheetname == "STCN_DATA":  
+                    stcn = True
                     print(sheetname + " extracting from gINT...")
                     query = f"SELECT * FROM {str(list_all_tables[df_iteration])} WHERE PointID IN ({str(bh_select)})"
                     df_iteration = pd.read_sql(query, gint)
@@ -285,9 +293,12 @@ Saving tables to excel file, this may take a while...
                 next(iter(final_dataframes.values())).to_excel(f"{self.export_dir}{self.filename}.xlsx", sheet_name=(f"{next(iter(final_dataframes))}"), index=None, index_label=None)
                 final_writer = pd.ExcelWriter(f"{self.export_dir}{self.filename}.xlsx", engine="openpyxl", mode="a", if_sheet_exists="replace")
             else:
-                print(f"All selected tables are empty! Please select others. Tables selected: {empty_dataframes}")
-                self.enable_buttons()
-                return
+                if stcn == True:
+                    pass
+                else:
+                    print(f"All selected tables are empty! Please select others. Tables selected: {empty_dataframes}")
+                    self.enable_buttons()
+                    return
 
             #for every key (table name) and value (table data) in the sql query dict, append to excel sheet and update progress bar, saving only at the end for performance
             for (k,v) in final_dataframes.items():
@@ -304,7 +315,10 @@ Saving tables to excel file, this may take a while...
                 value += progress_update
                 self.progress_bar.set(value)
                 window.update()
-            final_writer.save()
+            if final_dataframes == {} and stcn == True:
+                pass
+            else:
+                final_writer.save()
             
             if empty_dataframes != []:
                 print(f"""----------------------------------------------------
