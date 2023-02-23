@@ -23,7 +23,7 @@ def main():
             CTkScalingBaseClass.destroy(self)
             ct.deactivate_automatic_dpi_awareness()
 
-            window.title("gINT table exporter")
+            window.title("gINT table exporter v2.2")
             window.resizable(False,False)
             window.wm_iconbitmap(bitmap='common/assets/gint.ico', default='common/assets/gint.ico')
             window.geometry("125+125")
