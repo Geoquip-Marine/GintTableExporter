@@ -318,7 +318,7 @@ Saving tables to excel file, this may take a while...
             if final_dataframes == {} and stcn == True:
                 pass
             else:
-                final_writer.save()
+                final_writer.close()
             
             if empty_dataframes != []:
                 print(f"""----------------------------------------------------
